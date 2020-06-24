@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event.event %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>creator:</strong>
+  <strong><%= @event.creator.username %></strong>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <strong><%= @event.event_date %></strong>
+</p>
+
+
+
+<h2>Attendees</h2>
+<% @registered_attendees.each do |user| %>
+  <p><%= link_to user.username, user_path(user) %></p>
+<% end %>
+
+
+<h2>invite And uninvite users</h2>
+<% @users.each do |user| %>
+  <p><%= link_to user.username, eventsusers_path({event_id: @event.id, user_id: user.id}), method: :post %></p>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_event_path(@event) %>
+<%= link_to 'Back', events_path %>

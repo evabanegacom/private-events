@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<% if current_user %>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong>Events created by <%= @user.username %>:</strong>
+  <% @myevents.each do |event| %>
+    <p><strong><%= event.event %></strong></p>
+  <% end %>
+</p>
+<% end %>
+<%= link_to 'home', root_path %>
+<% if current_user %>
+<h3> create an event </h3>
+
+<%= render 'new-event' %>
+
+<p>list of events attended or to be attended by <%= @user.username %></p>
+<% if current_user %>
+<% @user.attended_events.each do |eve| %>
+<%= eve.event %>
+<% end %>
+<% end %>
+
+
+<p>previously attended events</p>
+<% @previous_events.each do |event| %>
+  <strong><p><%= event.event %></p></strong>
+    <strong><p><%= event.event_date %></p></strong>
+  <% end %>
+
+
+<p> upcoming events </p>
+<% @upcoming_events.each do |event| %>
+  <strong><p><%= event.event %></p></strong>
+    <strong><p><%= event.event_date %></p></strong>
+  <% end %>
+
+
+<% else %>
+<%= link_to 'Log In', new_session_path %>
+<% end %>
+
